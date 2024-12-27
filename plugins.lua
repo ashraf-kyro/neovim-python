@@ -51,10 +51,9 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "black",
         "debugpy",
         "mypy",
-        "ruff-lsp",
+        "ruff",
         "pyright",
       },
     },
@@ -64,6 +63,27 @@ local plugins = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
+    end,
+  },
+  -- Add Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" }, -- Required dependency
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          -- Configuration options for Telescope
+          prompt_prefix = "🔍 ",
+          selection_caret = "➤ ",
+          path_display = { "truncate" },
+          mappings = {
+            i = {
+              ["<C-u>"] = false,
+              ["<C-d>"] = false,
+            },
+          },
+        },
+      })
     end,
   },
 }
